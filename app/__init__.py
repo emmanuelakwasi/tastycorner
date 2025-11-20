@@ -5,6 +5,10 @@ from .db import init_app_db
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    
+    # Ensure directories exist
+    if hasattr(config_class, 'init_app'):
+        config_class.init_app(app)
 
     # Initialize Database
     init_app_db(app)
