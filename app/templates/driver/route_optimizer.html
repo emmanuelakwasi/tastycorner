@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Optimizer - TastyCorner</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8fafc;
+        }
+        .driver-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .driver-header a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .driver-header a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="driver-header">
+        <div>
+            <h1 style="font-size: 1.25rem; font-weight: 700;">Route Optimizer</h1>
+            <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">{{ employee.first_name }} {{ employee.last_name }}</p>
+        </div>
+        <a href="{{ url_for('driver_dashboard') }}">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+    
+    <!-- Simple Route Optimizer (works without React) -->
+    <div id="route-optimizer-container" style="min-height: calc(100vh - 60px); padding: 2rem; background: #f8fafc;">
+        {% if stops|length > 0 %}
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="background: white; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="material-symbols-outlined">route</span>
+                            Optimized Delivery Route
+                        </h2>
+                        <p style="color: #64748b; margin: 0;">
+                            {{ stops|length }} delivery{{ 'ies' if stops|length != 1 else 'y' }} pending
+                            {% if stops|length > 1 %}
+                            <span style="color: #10b981; font-weight: 600; margin-left: 0.5rem;">
+                                <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">check_circle</span>
+                                Route Optimized
+                            </span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% if stops|length > 1 %}
+                    <button onclick="openFullRoute()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">directions</span>
+                        Open Full Route in Maps
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 1rem;">
+                {% for stop in stops %}
+                <div class="delivery-stop-card" data-order-id="{{ stop.order_id }}" style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-left: 4px solid #3b82f6; transition: transform 0.2s, box-shadow 0.2s;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 1rem;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="background: #3b82f6; color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem;">
+                                    {{ loop.index }}
+                                </div>
+                                <div>
+                                    <h3 style="margin: 0 0 0.25rem 0; color: #1e293b; font-size: 1.25rem; font-weight: 700;">{{ stop.name }}</h3>
+                                    <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Order #{{ stop.order_id }}</p>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="material-symbols-outlined" style="color: #64748b; font-size: 20px;">location_on</span>
+                                    <span style="color: #1e293b; font-weight: 500;">{{ stop.address }}</span>
+                                </div>
+                                {% if stop.phone %}
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="material-symbols-outlined" style="color: #64748b; font-size: 20px;">phone</span>
+                                    <span style="color: #1e293b;">{{ stop.phone }}</span>
+                                </div>
+                                {% endif %}
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span class="material-symbols-outlined" style="color: #10b981; font-size: 20px;">payments</span>
+                                    <span style="color: #10b981; font-weight: 700;">${{ stop.total }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <button onclick="completeDelivery({{ stop.order_id }}, this)" class="complete-btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                                Mark Complete
+                            </button>
+                            <button onclick="openInMaps({{ stop.order_id }}, this)" data-address="{{ stop.address|e }}" style="background: #f3f4f6; color: #1e293b; border: 2px solid #e2e8f0; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; justify-content: center; transition: all 0.2s; font-family: inherit; font-size: inherit; width: 100%;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">map</span>
+                                Open in Maps
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 4rem; background: white; border-radius: 16px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 2rem auto;">
+            <span class="material-symbols-outlined" style="font-size: 4rem; color: #94a3b8; margin-bottom: 1rem;">inbox</span>
+            <h3 style="color: #1e293b; margin-bottom: 0.5rem;">No Pending Deliveries</h3>
+            <p style="color: #64748b;">All orders have been delivered or there are no orders ready for delivery.</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <script>
+        // Restaurant location (starting point for directions)
+        const restaurantLocation = {
+            lat: {{ start_location.lat }},
+            lng: {{ start_location.lng }},
+            name: '{{ start_location.name|e }}'
+        };
+        
+        // Open address in Google Maps with directions from restaurant
+        function openInMaps(orderId, buttonElement) {
+            try {
+                // Get the button element (passed as parameter or from event)
+                const button = buttonElement || (event && event.target.closest('button'));
+                if (!button) {
+                    console.error('Could not find button element');
+                    alert('Error: Could not find button element');
+                    return;
+                }
+                
+                // Get address from data attribute
+                const address = button.getAttribute('data-address');
+                if (!address) {
+                    alert('Address not found for this delivery');
+                    return;
+                }
+                
+                // Encode address for URL
+                const encodedAddress = encodeURIComponent(address);
+                
+                // Open Google Maps with directions from restaurant to destination
+                // Using 'dir' endpoint for turn-by-turn directions
+                const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${restaurantLocation.lat},${restaurantLocation.lng}&destination=${encodedAddress}`;
+                
+                console.log('Opening Google Maps:');
+                console.log('  From:', restaurantLocation.name, `(${restaurantLocation.lat}, ${restaurantLocation.lng})`);
+                console.log('  To:', address);
+                console.log('  URL:', mapsUrl);
+                
+                // Open in new tab
+                const newWindow = window.open(mapsUrl, '_blank');
+                
+                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    // If popup blocked, show alert with address
+                    alert('Popup blocked. Please allow popups for this site.\n\nAddress: ' + address + '\n\nYou can copy this address and paste it into Google Maps manually.');
+                }
+            } catch (error) {
+                console.error('Error opening Google Maps:', error);
+                alert('Error opening Google Maps: ' + error.message + '\n\nPlease try again or copy the address manually.');
+            }
+        }
+        
+        // Open full optimized route in Google Maps
+        function openFullRoute() {
+            try {
+                // Get all delivery stops
+                const stopCards = document.querySelectorAll('.delivery-stop-card');
+                if (stopCards.length === 0) {
+                    alert('No deliveries found');
+                    return;
+                }
+                
+                // Build waypoints array (all stops except the last one)
+                const waypoints = [];
+                const destinations = [];
+                
+                stopCards.forEach((card, index) => {
+                    const button = card.querySelector('button[data-address]');
+                    if (button) {
+                        const address = button.getAttribute('data-address');
+                        if (address) {
+                            if (index < stopCards.length - 1) {
+                                // All but last are waypoints
+                                waypoints.push(encodeURIComponent(address));
+                            } else {
+                                // Last one is destination
+                                destinations.push(encodeURIComponent(address));
+                            }
+                        }
+                    }
+                });
+                
+                // Build Google Maps URL with waypoints
+                let mapsUrl = `https://www.google.com/maps/dir/?api=1`;
+                mapsUrl += `&origin=${restaurantLocation.lat},${restaurantLocation.lng}`;
+                
+                if (waypoints.length > 0) {
+                    mapsUrl += `&waypoints=${waypoints.join('|')}`;
+                }
+                
+                if (destinations.length > 0) {
+                    mapsUrl += `&destination=${destinations[0]}`;
+                } else if (waypoints.length > 0) {
+                    // If no destination but we have waypoints, use last waypoint as destination
+                    mapsUrl += `&destination=${waypoints[waypoints.length - 1]}`;
+                }
+                
+                console.log('Opening full route in Google Maps:');
+                console.log('  From:', restaurantLocation.name);
+                console.log('  Waypoints:', waypoints.length);
+                console.log('  URL:', mapsUrl);
+                
+                // Open in new tab
+                const newWindow = window.open(mapsUrl, '_blank');
+                
+                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    alert('Popup blocked. Please allow popups for this site to open the full route in Google Maps.');
+                }
+            } catch (error) {
+                console.error('Error opening full route:', error);
+                alert('Error opening full route: ' + error.message);
+            }
+        }
+        
+        // Complete delivery function
+        async function completeDelivery(orderId, button) {
+            if (!confirm(`Mark order #${orderId} as completed?`)) {
+                return;
+            }
+            
+            // Disable button
+            button.disabled = true;
+            button.style.opacity = '0.6';
+            button.innerHTML = '<span class="material-symbols-outlined" style="font-size: 20px;">hourglass_empty</span> Processing...';
+            
+            try {
+                const response = await fetch(`{{ url_for('api_complete_delivery', order_id=0) }}`.replace('/0', `/${orderId}`), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Remove the delivery card
+                    const card = button.closest('.delivery-stop-card');
+                    if (card) {
+                        card.style.transition = 'opacity 0.3s, transform 0.3s';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateX(-20px)';
+                        setTimeout(() => {
+                            card.remove();
+                            // Reload page if no more deliveries
+                            const remainingCards = document.querySelectorAll('.delivery-stop-card');
+                            if (remainingCards.length === 0) {
+                                setTimeout(() => window.location.reload(), 500);
+                            }
+                        }, 300);
+                    }
+                    
+                    // Show success message
+                    showNotification('Order marked as completed!', 'success');
+                } else {
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.innerHTML = '<span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span> Mark Complete';
+                    showNotification(data.error || 'Failed to complete delivery', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                button.disabled = false;
+                button.style.opacity = '1';
+                button.innerHTML = '<span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span> Mark Complete';
+                showNotification('Failed to complete delivery. Please try again.', 'error');
+            }
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#ef4444'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            `;
+            notification.innerHTML = `
+                <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'error'}</span>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            .delivery-stop-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

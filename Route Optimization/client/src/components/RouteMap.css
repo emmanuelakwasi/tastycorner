@@ -1,0 +1,249 @@
+.RouteMap {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: var(--bg-primary, #f5f5f5);
+  transition: background-color 0.3s ease;
+}
+
+/* Custom Marker Styles - Uber-like */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.marker-pin {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: move;
+  transition: all 0.2s ease;
+}
+
+.marker-pin:hover {
+  transform: rotate(-45deg) scale(1.1);
+  z-index: 1000;
+}
+
+.marker-pin span {
+  transform: rotate(45deg);
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+
+.start-pin {
+  background: #4285f4;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3);
+}
+
+.stop-pin {
+  background: #34a853;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3);
+}
+
+.urgent-pin {
+  background: #ea4335;
+  border: 3px solid white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(255, 0, 0, 0.6);
+  }
+}
+
+.marker-popup {
+  text-align: center;
+  min-width: 150px;
+}
+
+.marker-popup strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.marker-popup p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.marker-popup small {
+  display: block;
+  color: #666;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.distance-info {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Route Lines */
+.route-line {
+  animation: dash 20s linear infinite;
+}
+
+.route-line.vehicle-route {
+  stroke-dasharray: none;
+  color: #4285f4;
+  stroke-width: 5;
+  opacity: 0.9;
+}
+
+.route-line.walking-route {
+  stroke-dasharray: 8, 4;
+  color: #34a853;
+  stroke-width: 4;
+  opacity: 0.8;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Parking Marker */
+.parking-pin {
+  background: #fbbc04;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3);
+}
+
+.parking-pin span {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Current Location Marker - Live Tracking */
+.current-location-marker {
+  z-index: 1001;
+}
+
+.current-location-pin {
+  background: #4285f4;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.4);
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.current-location-pin span {
+  font-size: 18px;
+  transform: rotate(45deg);
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid #4285f4;
+  border-radius: 50%;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Floating Controls - Uber-like */
+.RouteMap-floating-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-secondary, #ffffff);
+  color: var(--text-secondary, #5f6368);
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 1px 2px var(--shadow-light, rgba(60, 64, 67, 0.3)), 0 1px 3px 1px var(--shadow-dark, rgba(60, 64, 67, 0.15));
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-button:hover {
+  background: var(--bg-tertiary, #f8f9fa);
+  box-shadow: 0 2px 4px var(--shadow-light, rgba(60, 64, 67, 0.3)), 0 4px 8px 2px var(--shadow-dark, rgba(60, 64, 67, 0.15));
+}
+
+.floating-button:active {
+  background: #f1f3f4;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+}
+
+.add-stop-btn {
+  background: #4285f4;
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.add-stop-btn:hover {
+  background: #1a73e8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .RouteMap-floating-controls {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .floating-button {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .marker-pin {
+    width: 36px;
+    height: 36px;
+  }
+
+  .marker-pin span {
+    font-size: 12px;
+  }
+}
+

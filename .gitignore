@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Flask
+instance/
+.webassets-cache
+
+# Data files (Keep data local)
+data/
+*.csv
+*.db
+*.sqlite
+*.sqlite3
+employees.db
+tastycorner.db
+
+# Environment variables (CRITICAL)
+.env
+.env.local
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

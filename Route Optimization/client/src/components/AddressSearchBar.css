@@ -1,0 +1,225 @@
+.AddressSearchBar {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  z-index: 999;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.AddressSearchBar-form {
+  max-width: 100%;
+}
+
+.AddressSearchBar-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
+}
+
+.AddressSearchBar-input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--overlay-bg, rgba(255, 255, 255, 0.95));
+  color: var(--text-primary, #000000);
+  box-shadow: 0 4px 16px var(--shadow-dark, rgba(0, 0, 0, 0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.AddressSearchBar-input:focus {
+  outline: none;
+  box-shadow: 0 6px 24px var(--shadow-dark, rgba(0, 0, 0, 0.3));
+  background: var(--overlay-bg, rgba(255, 255, 255, 0.98));
+  transform: translateY(-2px);
+}
+
+.AddressSearchBar-input:disabled {
+  background: var(--bg-tertiary, #f5f5f5);
+  cursor: not-allowed;
+}
+
+.AddressSearchBar-button {
+  padding: 1rem 1.5rem;
+  background: var(--accent-color, #000000);
+  color: var(--bg-secondary, #ffffff);
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  min-width: 100px;
+  box-shadow: 0 4px 16px var(--shadow-dark, rgba(0, 0, 0, 0.3));
+}
+
+.AddressSearchBar-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--shadow-dark, rgba(0, 0, 0, 0.4));
+  opacity: 0.9;
+}
+
+.AddressSearchBar-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--shadow-dark, rgba(0, 0, 0, 0.2));
+}
+
+
+.AddressSearchBar-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.AddressSearchBar-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.AddressSearchBar-error {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  border-left: 3px solid #dc3545;
+}
+
+.AddressSearchBar-recent {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.AddressSearchBar-recent small {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.AddressSearchBar-recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.AddressSearchBar-recent-item {
+  padding: 0.5rem 0.75rem;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.AddressSearchBar-recent-item:hover {
+  background: #e0e0e0;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+/* Autocomplete Suggestions */
+.AddressSearchBar-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.2);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.AddressSearchBar-suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.15s;
+}
+
+.AddressSearchBar-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.AddressSearchBar-suggestion-item:hover,
+.AddressSearchBar-suggestion-item.selected {
+  background-color: #f1f3f4;
+}
+
+.AddressSearchBar-suggestion-main {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.AddressSearchBar-suggestion-secondary {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Scrollbar styling for suggestions */
+.AddressSearchBar-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.AddressSearchBar-suggestions::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.AddressSearchBar-suggestions::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.AddressSearchBar-suggestions::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .AddressSearchBar {
+    padding: 0.75rem;
+  }
+
+  .AddressSearchBar-input {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .AddressSearchBar-button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+    min-width: 80px;
+  }
+
+  .AddressSearchBar-suggestions {
+    max-height: 250px;
+  }
+}
+

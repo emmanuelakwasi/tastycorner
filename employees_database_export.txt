@@ -1,0 +1,142 @@
+====================================================================================================
+EMPLOYEES DATABASE VIEWER
+====================================================================================================
+
+Database: data\employees.db
+Columns: id, employee_id, first_name, last_name, email, gender, dob, mobile, address, job_title, notes, created_at, status, schedule
+
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+EMPLOYEE #1
+────────────────────────────────────────────────────────────────────────────────────────────────────
+ID: 3
+EMPLOYEE_ID: 209228
+FIRST_NAME: Prince
+LAST_NAME: Owusu
+EMAIL: owusu.prince2577@gmail.com
+GENDER: Male
+DOB: 2019-12-30
+MOBILE: +233257736977
+ADDRESS: Deduako
+JOB_TITLE: Supervisor
+NOTES: 
+CREATED_AT: 2025-11-16 05:40:04
+STATUS: active
+
+SCHEDULE:
+  {
+    "monday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "tuesday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "wednesday": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "thursday": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "friday": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "saturday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "sunday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    }
+}
+
+  Formatted Schedule:
+    Monday      : OFF
+    Tuesday     : OFF
+    Wednesday   : 09:00 - 17:00
+    Thursday    : 09:00 - 17:00
+    Friday      : 09:00 - 17:00
+    Saturday    : OFF
+    Sunday      : OFF
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+EMPLOYEE #2
+────────────────────────────────────────────────────────────────────────────────────────────────────
+ID: 4
+EMPLOYEE_ID: 538519
+FIRST_NAME: Adwoa
+LAST_NAME: Pokua
+EMAIL: eopoku@gsumail.gram.edu
+GENDER: Male
+DOB: 2015-02-03
+MOBILE: 13183946861
+ADDRESS: Ghna
+JOB_TITLE: Cook
+NOTES: 
+CREATED_AT: 2025-11-16 05:42:02
+STATUS: active
+
+SCHEDULE:
+  {
+    "monday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "tuesday": {
+        "enabled": true,
+        "start": "11:00",
+        "end": "14:00"
+    },
+    "wednesday": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "thursday": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "friday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "saturday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    },
+    "sunday": {
+        "enabled": false,
+        "start": "09:00",
+        "end": "17:00"
+    }
+}
+
+  Formatted Schedule:
+    Monday      : OFF
+    Tuesday     : 11:00 - 14:00
+    Wednesday   : 09:00 - 17:00
+    Thursday    : 09:00 - 17:00
+    Friday      : OFF
+    Saturday    : OFF
+    Sunday      : OFF
+
+====================================================================================================
+Total employees: 2

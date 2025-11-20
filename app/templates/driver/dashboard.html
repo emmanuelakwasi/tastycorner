@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Delivery Driver Dashboard - TastyCorner{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+    <div class="driver-header" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; color: white; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h1 style="margin: 0 0 0.5rem 0; font-size: 2rem; font-weight: 800;">Delivery Driver Dashboard</h1>
+                <p style="margin: 0; opacity: 0.9; font-size: 1.1rem;">Welcome, {{ employee.first_name }} {{ employee.last_name }}</p>
+            </div>
+            <a href="{{ url_for('driver_route_optimizer') }}" class="btn" style="background: white; color: #3b82f6; font-weight: 700; padding: 0.75rem 2rem; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                <span class="material-symbols-outlined">route</span>
+                Open Route Optimizer
+            </a>
+        </div>
+    </div>
+
+    <div class="driver-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="stat-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); border-left: 4px solid #3b82f6;">
+            <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 0.5rem;">Pending Deliveries</div>
+            <div style="font-size: 2rem; font-weight: 800; color: #1e293b;">{{ pending_orders|length }}</div>
+        </div>
+        <div class="stat-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); border-left: 4px solid #10b981;">
+            <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 0.5rem;">Total Orders</div>
+            <div style="font-size: 2rem; font-weight: 800; color: #1e293b;">{{ pending_orders|length }}</div>
+        </div>
+    </div>
+
+    <div class="deliveries-section" style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; color: #1e293b;">Pending Deliveries</h2>
+            <a href="{{ url_for('driver_route_optimizer') }}" class="btn btn-primary" style="text-decoration: none;">
+                <span class="material-symbols-outlined">route</span>
+                Optimize Route
+            </a>
+        </div>
+
+        {% if pending_orders %}
+        <div class="deliveries-list" style="display: grid; gap: 1rem;">
+            {% for order in pending_orders %}
+            <div class="delivery-card" style="border: 2px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease;">
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="background: #3b82f6; color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem;">
+                                #{{ order.order_id }}
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 1.1rem; color: #1e293b; margin-bottom: 0.25rem;">{{ order.customer_name }}</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">{{ order.delivery_address }}</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                            <div>
+                                <span style="color: #64748b;">Phone:</span>
+                                <span style="color: #1e293b; font-weight: 600; margin-left: 0.5rem;">{{ order.customer_phone or 'N/A' }}</span>
+                            </div>
+                            <div>
+                                <span style="color: #64748b;">Total:</span>
+                                <span style="color: #10b981; font-weight: 700; margin-left: 0.5rem;">${{ "%.2f"|format(order.total|float) }}</span>
+                            </div>
+                            <div>
+                                <span style="color: #64748b;">Order Time:</span>
+                                <span style="color: #1e293b; margin-left: 0.5rem;">{{ order.created_at.split(' ')[1] if order.created_at else 'N/A' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <span style="background: #fef3c7; color: #92400e; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-align: center;">
+                            {{ order.status|replace('_', ' ')|title }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 3rem; color: #64748b;">
+            <span class="material-symbols-outlined" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.5;">inbox</span>
+            <p style="font-size: 1.1rem; margin: 0;">No pending deliveries at the moment.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

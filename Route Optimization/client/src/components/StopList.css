@@ -1,0 +1,169 @@
+.StopList {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.StopList h2 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: #202124;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.StopList-empty {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+.StopList-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.StopList-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 3px solid #4285f4;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
+  border: 1px solid #e8eaed;
+}
+
+.StopList-item:hover {
+  box-shadow: 0 2px 4px rgba(60, 64, 67, 0.15);
+  border-left-color: #1a73e8;
+}
+
+.StopList-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.StopList-item-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.StopList-item-number {
+  background: #4285f4;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.2);
+}
+
+.StopList-item-update-location {
+  background: #4285f4;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.StopList-item-update-location:hover {
+  background: #1a73e8;
+  transform: scale(1.1);
+}
+
+.StopList-item-remove {
+  background: #ff4757;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.StopList-item-remove:hover {
+  background: #ff3838;
+  transform: scale(1.1);
+}
+
+.StopList-item-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.StopList-item-address {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0;
+}
+
+.StopList-item-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.StopList-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.StopList-badge.urgent {
+  background: #ff4757;
+  color: white;
+}
+
+.StopList-badge.priority-1 {
+  background: #ff6b6b;
+  color: white;
+}
+
+.StopList-badge.priority-2 {
+  background: #ffa502;
+  color: white;
+}
+
+.StopList-badge.priority-3 {
+  background: #747d8c;
+  color: white;
+}
+
+.StopList-item-timewindow {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.StopList-item-timewindow small {
+  color: #666;
+  font-size: 0.8rem;
+}
+

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Delivery Driver Login - TastyCorner{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-wrapper">
+        <div class="auth-hero">
+            <div class="auth-hero-top">
+                <span class="auth-badge">Delivery Driver Portal 🚗</span>
+                <h1>Welcome Back</h1>
+                <p>Access your delivery driver dashboard. View pending deliveries, optimize routes, and manage your deliveries efficiently.</p>
+            </div>
+            <div class="auth-highlights">
+                <div class="highlight-card">
+                    <span class="highlight-icon">📍</span>
+                    <p>View pending deliveries</p>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-icon">🗺️</span>
+                    <p>Optimize delivery routes</p>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-icon">✅</span>
+                    <p>Mark deliveries complete</p>
+                </div>
+            </div>
+        </div>
+        <div class="auth-card">
+            <div class="auth-card-header">
+                <h2>Driver Login</h2>
+                <p class="auth-subtitle">Enter your Employee ID to continue</p>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="employee_id">Employee ID</label>
+                    <input 
+                        type="text" 
+                        id="employee_id" 
+                        name="employee_id" 
+                        placeholder="Enter your Employee ID" 
+                        required 
+                        autocomplete="off"
+                        class="form-input"
+                    >
+                    <small class="form-hint">Your Employee ID is provided by your administrator</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block btn-large">Access Driver Dashboard</button>
+            </form>
+            <div class="auth-footer">
+                <p>Need help? <a href="{{ url_for('contact') }}">Contact your administrator</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

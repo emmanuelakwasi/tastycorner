@@ -1,0 +1,92 @@
+.EnhancedLocation {
+  position: fixed;
+  top: 200px;
+  left: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3), 0 4px 16px rgba(60, 64, 67, 0.2);
+  padding: 1rem;
+  z-index: 999;
+  border: 1px solid #dadce0;
+  min-width: 250px;
+  max-width: 350px;
+}
+
+.EnhancedLocation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e8eaed;
+}
+
+.EnhancedLocation-icon {
+  font-size: 1.25rem;
+}
+
+.EnhancedLocation-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #202124;
+  flex: 1;
+}
+
+.EnhancedLocation-spinner {
+  font-size: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.EnhancedLocation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.EnhancedLocation-address {
+  font-size: 0.9375rem;
+  color: #202124;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.EnhancedLocation-extra {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.EnhancedLocation-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #e8f0fe;
+  color: #1a73e8;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.EnhancedLocation-coords {
+  font-size: 0.75rem;
+  color: #5f6368;
+  font-family: monospace;
+  margin-top: 0.25rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .EnhancedLocation {
+    top: auto;
+    bottom: 280px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: none;
+  }
+}
+

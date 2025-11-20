@@ -1,0 +1,297 @@
+.TrafficConditions {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--bg-secondary, #ffffff);
+  color: var(--text-primary, #202124);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-light, rgba(60, 64, 67, 0.3)), 0 4px 16px var(--shadow-dark, rgba(60, 64, 67, 0.2));
+  padding: 1rem;
+  z-index: 998;
+  max-width: 320px;
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-color, #dadce0);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.TrafficConditions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color, #e8eaed);
+}
+
+.TrafficConditions-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #202124);
+}
+
+.TrafficConditions-update-time {
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #9aa0a6);
+}
+
+.TrafficConditions-loading {
+  text-align: center;
+  padding: 0.5rem;
+  color: var(--text-secondary, #5f6368);
+  font-size: 0.875rem;
+}
+
+.TrafficConditions-overall {
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.TrafficConditions-overall.low {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.TrafficConditions-overall.moderate {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ff9800;
+}
+
+.TrafficConditions-overall.heavy {
+  background: #fce4ec;
+  color: #c2185b;
+  border: 1px solid #e91e63;
+}
+
+.TrafficConditions-overall.severe {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #f44336;
+}
+
+.TrafficConditions-overall-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.TrafficConditions-overall-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.TrafficConditions-delay {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+  opacity: 0.9;
+}
+
+.TrafficConditions-section {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color, #e8eaed);
+}
+
+.TrafficConditions-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.TrafficConditions-section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary, #202124);
+  margin-bottom: 0.5rem;
+}
+
+.TrafficConditions-weather {
+  font-size: 0.875rem;
+}
+
+.TrafficConditions-weather-summary {
+  color: var(--text-secondary, #5f6368);
+  margin-bottom: 0.5rem;
+}
+
+.TrafficConditions-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.TrafficConditions-alert {
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+}
+
+.TrafficConditions-alert-high {
+  background: #ffebee;
+  color: #c62828;
+  border-left: 3px solid #f44336;
+}
+
+.TrafficConditions-alert-moderate {
+  background: #fff3e0;
+  color: #e65100;
+  border-left: 3px solid #ff9800;
+}
+
+.TrafficConditions-alert-low {
+  background: #e3f2fd;
+  color: #1565c0;
+  border-left: 3px solid #2196f3;
+}
+
+.TrafficConditions-safety {
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.TrafficConditions-safety-good {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.TrafficConditions-safety-moderate {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ff9800;
+}
+
+.TrafficConditions-safety-poor {
+  background: #ffebee;
+  color: #c2185b;
+  border: 1px solid #e91e63;
+}
+
+.TrafficConditions-safety-level {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.TrafficConditions-safety-factors {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.TrafficConditions-factor {
+  margin: 0.25rem 0;
+  color: var(--text-secondary, #5f6368);
+}
+
+.TrafficConditions-warnings {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.TrafficConditions-warning {
+  font-size: 0.8125rem;
+  color: #c62828;
+  margin: 0.25rem 0;
+  font-weight: 500;
+}
+
+.TrafficConditions-recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.TrafficConditions-recommendation {
+  padding: 0.625rem;
+  background: var(--bg-tertiary, #f8f9fa);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  color: var(--text-primary, #202124);
+  border-left: 3px solid #4285f4;
+}
+
+.TrafficConditions-segments {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.TrafficConditions-segment {
+  padding: 0.75rem;
+  background: var(--bg-tertiary, #f8f9fa);
+  border-radius: 8px;
+  border-left: 3px solid #4285f4;
+}
+
+.TrafficConditions-segment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.TrafficConditions-segment-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary, #202124);
+}
+
+.TrafficConditions-segment-level {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.TrafficConditions-segment-level.low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.TrafficConditions-segment-level.moderate {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.TrafficConditions-segment-level.heavy {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.TrafficConditions-segment-level.severe {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.TrafficConditions-segment-delay {
+  font-size: 0.8125rem;
+  color: var(--text-secondary, #5f6368);
+  margin-top: 0.25rem;
+}
+
+.TrafficConditions-segment-message {
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #9aa0a6);
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .TrafficConditions {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    max-height: 50vh;
+  }
+}
+

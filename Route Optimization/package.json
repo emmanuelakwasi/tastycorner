@@ -1,0 +1,32 @@
+{
+  "name": "food-truck-route-optimizer",
+  "version": "1.0.0",
+  "description": "Route optimization app for food truck delivery drivers",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/index.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd client && npm install",
+    "train-ml": "node server/scripts/trainModel.js"
+  },
+  "keywords": [
+    "route-optimization",
+    "food-truck",
+    "delivery"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "ml-matrix": "^6.12.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
+  }
+}
